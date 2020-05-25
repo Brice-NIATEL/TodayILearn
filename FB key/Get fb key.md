@@ -12,3 +12,10 @@ keytool -exportcert -alias androiddebugkey -keystore "C:\Users\brice\.android\de
 3/	Ajouter un mot de passe
 
 4/	Enregistrer la clef de hachage de développement
+
+
+Autre méthode qui fonctionne :
+
+1/	Prendre la clef sha1 de l'app
+
+2/	http://tomeko.net/online_tools/hex_to_base64.php --> transformer la clef en base64
