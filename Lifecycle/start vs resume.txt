@@ -1,0 +1,2 @@
+onStart() --> partie affichage
+onResume() --> partie de des premières méthodes de traitement 
