@@ -1,0 +1,9 @@
+https://stackoverflow.com/questions/4275678/how-to-make-a-phone-call-using-intent-in-android
+
+Code : 
+	Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "Your Phone_number"));
+	startActivity(intent);
+
+
+Permission in Manifest:
+	<uses-permission android:name="android.permission.CALL_PHONE" />

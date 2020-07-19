@@ -1,0 +1,25 @@
+private static class GetTasks extends AsyncTask<Void, Void, Void> {
+        private WeakReference<MainActivity> activityReference;
+
+        GetTasks(MainActivity mainActivity) {
+            activityReference = new WeakReference<>(mainActivity);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            MainActivity activity = activityReference.get();
+            if (activity != null && !activity.isFinishing()) {
+                activity.tasks = (ArrayList<Task>) MainActivity.myAppDatabase.myDao().getTasks();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            MainActivity activity = activityReference.get();
+            if (activity != null && !activity.isFinishing()) {
+                activity.updateTasks();
+            }
+        }
+    }
