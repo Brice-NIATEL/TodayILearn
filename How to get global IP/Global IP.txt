@@ -1,0 +1,37 @@
+String getPublicIPAddress() {
+        String value = null;
+        ExecutorService es = Executors.newSingleThreadExecutor();
+        Future<String> result = es.submit(new Callable<String>() {
+            public String call() throws Exception {
+                try {
+                    URL url = new URL("https://whatismyip.akamai.com/");
+                    HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                    urlConnection.setHostnameVerifier(new hosteee());
+                    try {
+                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                        BufferedReader r = new BufferedReader(new InputStreamReader(in));
+                        StringBuilder total = new StringBuilder();
+                        String line;
+                        while ((line = r.readLine()) != null) {
+                            total.append(line).append('\n');
+                        }
+                        urlConnection.disconnect();
+                        return total.toString();
+                    } finally {
+                        urlConnection.disconnect();
+                    }
+                } catch (IOException e) {
+                    Log.e(TAG, Objects.requireNonNull(e.getMessage()));
+                }
+                return null;
+            }
+        });
+        try {
+            value = result.get();
+        } catch (
+                Exception e) {
+            Log.e(TAG, "getPublicIPAddress: ", e);
+        }
+        es.shutdown();
+        return value;
+    }
